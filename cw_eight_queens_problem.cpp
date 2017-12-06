@@ -17,8 +17,6 @@ namespace nQueens
 
 			}
 
-			// allowed range of valid 2D coordinates: {0 <= x (row) < n}, {0 <= y (column) < n}
-
 			if ((queen_positions[i].first < current_coord.first) && (queen_positions[i].second < current_coord.second)) {
 
 				if ((current_coord.first - queen_positions[i].first) == (current_coord.second - queen_positions[i].second)) {
@@ -135,7 +133,7 @@ namespace nQueens
 
 		auto chessboard_transposed { chessboard };
 
-		std::string chessboard_table_str{};
+		std::string chessboard_table_str(n * (n + 1), '.');
 		
 		for (size_t i{}; i != n; i++) {
 
@@ -145,14 +143,18 @@ namespace nQueens
 
 			}
 
-		}		
+		}
+
+		size_t i{};	
 		
 		for (const auto& row : chessboard_transposed) {
 
 			for (const char ch : row) {
 
-				chessboard_table_str += ch;
-			
+				if (('Q' == ch) || ('\n' == ch)) chessboard_table_str[i] = ch;
+
+				i++;
+							
 			}
 
 		}		
